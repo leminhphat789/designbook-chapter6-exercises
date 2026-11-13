@@ -1,16 +1,5 @@
 # Bài 6.18 — Đóng gói processor trong Program
 
-## Chạy
-
-Cần JDK 17 trở lên. Mở terminal trong folder `6.18`:
-
-```powershell
-javac -encoding UTF-8 -d build *.java
-java -cp build Main
-```
-
-Folder chứa đầy đủ mã nền, chạy độc lập. Mỗi lớp/interface/enum có file Java riêng. `Main.java` chỉ chứa chương trình chạy thử và kiểm tra.
-
 ## Phần phát triển từ bài 6.17
 
 Client gọi trực tiếp `Program.add`, `remove`, `clear`, `undoLast`. `Program` giữ riêng một `CommandProcessor` và chuyển mỗi thao tác thay đổi lịch thành lệnh. Lời giải cũng giữ `redoLast()` của bài trước.
@@ -41,14 +30,6 @@ processor.execute(Commands.add(schedule, show, day));
 ```
 
 Lệnh sửa trực tiếp `Schedule`, không gọi ngược `Program.add()`. Nếu gọi ngược, thao tác có thể tiếp tục tạo lệnh mới và dẫn đến đệ quy. Mỗi lần gọi add/remove/clear tạo một lệnh mới, bảo đảm không tái sử dụng sai đối tượng trong lịch sử.
-
-## Thực hành
-
-Đọc `exercise18()`. Client chỉ thao tác qua Program. Kiểm tra ghi đè A bằng B rồi undo về A, redo về B; xóa và khôi phục; clear rồi khôi phục phim ở cả thứ Hai và Chủ nhật; redo clear; và kiểm tra `get()` trả bản sao riêng cho cả Movie và NullShow.
-
-Đây là bản minh họa tối thiểu của hệ thống Show: Movie và NullShow đủ để thực hành bốn bài về Command. Khi tích hợp các kiểu Show của bài trước, phương thức `copy()` của mỗi kiểu cần bảo đảm sao chép sâu.
-
-Kết quả đã chạy: `PASS: 24 checks`.
 
 ## Các file trong folder
 
